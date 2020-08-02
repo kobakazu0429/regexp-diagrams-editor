@@ -16,8 +16,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --ext .ts,.tsx ./src --fix",
-      "git add"
+      "eslint --ext .ts,.tsx ./src --fix"
     ]
   },
   "dependencies": {
@@ -34,8 +33,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.0",
     "react-split-pane": "^0.1.91",
-    "resize-observer-polyfill": "^1.5.1",
-    "styled-components": "^5.0.1"
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
     "@kobakazu0429/eslint-config-typescript-react": "1.1.0",
@@ -43,7 +41,6 @@
     "@types/react": "16.9.44",
     "@types/react-dom": "16.9.8",
     "@types/react-router-dom": "5.1.5",
-    "@types/styled-components": "5.1.2",
     "clean-webpack-plugin": "3.0.0",
     "css-loader": "4.2.0",
     "eslint": "7.6.0",
