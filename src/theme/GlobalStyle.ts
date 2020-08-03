@@ -9,36 +9,13 @@ export const GlobalStyle = css`
 
   html,
   body {
+    height: 100vh;
     overflow: hidden;
     color: #ffffff;
-    background: #2f2f2f;
   }
 
-  ul,
-  li {
-    margin: 0;
-    padding: 0;
-  }
-
-  input,
-  button,
-  textarea,
-  select {
-    appearance: none;
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
-    border-radius: 0;
-  }
-
-  button {
-    background-color: transparent;
-    cursor: pointer;
-  }
-
-  a {
-    text-decoration: none;
+  #root {
+    height: 100%;
   }
 
   .Resizer {

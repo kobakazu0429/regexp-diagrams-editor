@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useReactDiagrams } from "../../Contexts/ReactDiagramsContext";
-import { BaseButton } from "../Button";
+
 import { TrayItemWidget } from "../Tray/TrayItem";
+import { Button } from "@material-ui/core";
 
 const data = {
   id: "c18f81fe-fdc0-4d55-844a-1deba7f08435",
@@ -120,18 +121,28 @@ export const SidePane: FC = () => {
     <Wrapper>
       <div>
         <p>sidebar/blocks</p>
-        <BaseButton onClick={() => console.log(model.serialize())}>
+        <Button variant="outlined" fullWidth>
+          Default
+        </Button>
+
+        <Button
+          variant="outlined"
+          fullWidth
+          onClick={() => console.log(model.serialize())}
+        >
           serialize
-        </BaseButton>
-        <br />
-        <BaseButton
+        </Button>
+
+        <Button
+          variant="outlined"
+          fullWidth
           onClick={() => {
             model.deserializeModel(JSON.parse(JSON.stringify(data)), engine);
             engine.repaintCanvas();
           }}
         >
           deserialize
-        </BaseButton>
+        </Button>
         <div>
           <TrayItemWidget
             model={{ type: "in" }}
@@ -150,6 +161,9 @@ export const SidePane: FC = () => {
 };
 
 const Wrapper = styled.div`
+  width: 300px;
+  height: 100%;
+  border-right: 1px solid gray;
   padding: 20px;
 
   button {
