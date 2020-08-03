@@ -125,7 +125,7 @@ export const SidePane: FC = () => {
         <button
           onClick={() => {
             model.deserializeModel(JSON.parse(JSON.stringify(data)), engine);
-            engine.setModel(model);
+            engine.repaintCanvas();
           }}
         >
           engine
