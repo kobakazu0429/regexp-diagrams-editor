@@ -102,12 +102,43 @@ const Sample: FC = () => {
 };
 
 export const MainPane: FC = () => {
+  const { engine, model } = useReactDiagrams();
   return (
     <Wrapper>
       <div>
         <p>header/controller</p>
       </div>
-      <EditorWrapper>
+      <EditorWrapper
+        onDrop={event => {
+          const data = JSON.parse(
+            event.dataTransfer.getData("storm-diagram-node")
+          );
+          const nodesCount = model.getNodes().length;
+
+          let node: DefaultNodeModel | null = null;
+
+          if (data.type === "in") {
+            node = new DefaultNodeModel(
+              "Node " + (nodesCount + 1),
+              "rgb(192,255,0)"
+            );
+            node.addInPort("In");
+          } else {
+            node = new DefaultNodeModel(
+              "Node " + (nodesCount + 1),
+              "rgb(0,192,255)"
+            );
+            node.addOutPort("Out");
+          }
+          const point = engine.getRelativeMousePoint(event);
+          node.setPosition(point);
+          model.addNode(node);
+          engine.repaintCanvas();
+        }}
+        onDragOver={event => {
+          event.preventDefault();
+        }}
+      >
         <Sample />
       </EditorWrapper>
       <div>

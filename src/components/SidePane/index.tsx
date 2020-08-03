@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useReactDiagrams } from "../../Contexts/ReactDiagramsContext";
+import { BaseButton } from "../Button";
+import { TrayItemWidget } from "../Tray/TrayItem";
 
 const data = {
   id: "c18f81fe-fdc0-4d55-844a-1deba7f08435",
@@ -118,21 +120,39 @@ export const SidePane: FC = () => {
     <Wrapper>
       <div>
         <p>sidebar/blocks</p>
-        <button onClick={() => console.log(model.serialize())}>
+        <BaseButton onClick={() => console.log(model.serialize())}>
           serialize
-        </button>
+        </BaseButton>
         <br />
-        <button
+        <BaseButton
           onClick={() => {
             model.deserializeModel(JSON.parse(JSON.stringify(data)), engine);
             engine.repaintCanvas();
           }}
         >
-          engine
-        </button>
+          deserialize
+        </BaseButton>
+        <div>
+          <TrayItemWidget
+            model={{ type: "in" }}
+            name="In Node"
+            color="rgb(192,255,0)"
+          />
+          <TrayItemWidget
+            model={{ type: "out" }}
+            name="Out Node"
+            color="rgb(0,192,255)"
+          />
+        </div>
       </div>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 20px;
+
+  button {
+    margin: 5px 0;
+  }
+`;
