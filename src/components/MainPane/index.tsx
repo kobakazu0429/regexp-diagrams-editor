@@ -1,16 +1,76 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC } from "react";
 import styled from "@emotion/styled";
 import {
   DefaultNodeModel,
-  DefaultLinkModel
+  DefaultLinkModel,
+  DiagramModel,
+  DefaultPortModel
 } from "@projectstorm/react-diagrams";
 import { CanvasWidget } from "@projectstorm/react-canvas-core";
 import { useReactDiagrams } from "../../Contexts/ReactDiagramsContext";
 
-const Sample: FC = () => {
-  const { engine, model } = useReactDiagrams();
+function createNode(name: string): DefaultNodeModel {
+  return new DefaultNodeModel(name, "rgb(0,192,255)");
+}
 
-  //3-A) create a default node
+let count = 0;
+
+function connectNodes(nodeFrom: DefaultNodeModel, nodeTo: DefaultNodeModel) {
+  count++;
+  const portOut = nodeFrom.addPort(
+    new DefaultPortModel(true, `out-${count}`, "Out")
+  );
+  const portTo = nodeTo.addPort(
+    new DefaultPortModel(false, `to-${count}`, "IN")
+  );
+
+  return portOut.link(portTo);
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const createInOutNodes = (model: DiagramModel): void => {
+  const nodesFrom: DefaultNodeModel[] = [];
+  const nodesTo: DefaultNodeModel[] = [];
+
+  nodesFrom.push(createNode("from-1"));
+  nodesFrom.push(createNode("from-2"));
+  nodesFrom.push(createNode("from-3"));
+
+  nodesTo.push(createNode("to-1"));
+  nodesTo.push(createNode("to-2"));
+  nodesTo.push(createNode("to-3"));
+
+  //4) link nodes together
+  const links = nodesFrom.map((node, index) => {
+    return connectNodes(node, nodesTo[index]);
+  });
+
+  // more links for more complicated diagram
+  links.push(connectNodes(nodesFrom[0], nodesTo[1]));
+  links.push(connectNodes(nodesTo[0], nodesFrom[1]));
+  links.push(connectNodes(nodesFrom[1], nodesTo[2]));
+
+  // initial random position
+  nodesFrom.forEach((node, index) => {
+    node.setPosition(index * 100, index * 100);
+    model.addNode(node);
+  });
+
+  nodesTo.forEach((node, index) => {
+    node.setPosition(index * 100, 100);
+    model.addNode(node);
+  });
+
+  links.forEach(link => {
+    model.addLink(link);
+  });
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+function createSimpleNodes(model: DiagramModel) {
   const node1 = new DefaultNodeModel({
     name: "Node 1",
     color: "rgb(0,192,255)"
@@ -30,11 +90,14 @@ const Sample: FC = () => {
 
   //4) add the models to the root graph
   model.addAll(node1, node2, link1);
+}
 
-  //5) load model into engine
+const Sample: FC = () => {
+  const { engine, model } = useReactDiagrams();
+
+  createInOutNodes(model);
   engine.setModel(model);
 
-  //6) render the diagram!
   return <CanvasWidget engine={engine} />;
 };
 
