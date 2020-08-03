@@ -9,16 +9,6 @@
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "lint": "eslint --ext .ts,.tsx ./src --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --ext .ts,.tsx ./src --fix"
-    ]
-  },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -50,8 +40,6 @@
     "file-loader": "6.0.0",
     "fork-ts-checker-webpack-plugin": "5.0.13",
     "html-webpack-plugin": "4.3.0",
-    "husky": "4.2.5",
-    "lint-staged": "10.2.11",
     "style-loader": "1.2.1",
     "ts-loader": "8.0.2",
     "typescript": "3.9.7",

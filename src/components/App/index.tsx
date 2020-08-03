@@ -3,6 +3,7 @@ import { Global } from "@emotion/core";
 import { GlobalStyle } from "@/theme/GlobalStyle";
 import { createRouter } from "@/routes";
 import { TopPage } from "@/pages/TopPage";
+import { ReactDiagramsContextProvider } from "../../Contexts/ReactDiagramsContext";
 
 const routes = [
   {
@@ -18,7 +19,7 @@ export const App: FC = () => {
   return (
     <>
       <Global styles={GlobalStyle} />
-      {Router}
+      <ReactDiagramsContextProvider>{Router}</ReactDiagramsContextProvider>
     </>
   );
 };

@@ -1,18 +1,14 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
-import createEngine, {
-  DiagramModel,
+import {
   DefaultNodeModel,
   DefaultLinkModel
 } from "@projectstorm/react-diagrams";
 import { CanvasWidget } from "@projectstorm/react-canvas-core";
+import { useReactDiagrams } from "../../Contexts/ReactDiagramsContext";
 
 const Sample: FC = () => {
-  //1) setup the diagram engine
-  const engine = createEngine();
-
-  //2) setup the diagram model
-  const model = new DiagramModel();
+  const { engine, model } = useReactDiagrams();
 
   //3-A) create a default node
   const node1 = new DefaultNodeModel({
