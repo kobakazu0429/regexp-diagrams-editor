@@ -39,7 +39,7 @@
     "eslint-loader": "4.0.2",
     "eslint-plugin-import": "2.22.1",
     "file-loader": "6.0.0",
-    "fork-ts-checker-webpack-plugin": "5.0.14",
+    "fork-ts-checker-webpack-plugin": "5.2.1",
     "html-webpack-plugin": "4.3.0",
     "style-loader": "1.2.1",
     "ts-loader": "8.0.18",
